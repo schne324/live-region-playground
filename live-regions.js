@@ -48,7 +48,8 @@ function configureInsertion() {
   if (freq === 'once') {
     insertContent()
   } else {
-    setInterval(insertContent, (freq === 'five') ? 5 : 10)
+    var freq = (freq === 'five') ? 5 : 10;
+    setInterval(insertContent, freq * 1000)
   }
 }
 
@@ -58,11 +59,21 @@ function insertContent() {
 }
 
 function onroleChange() {
+  var activeCache = document.activeElement;
   var role = $role.val();
-
+  console.log('role: ', role);
   $('#loading').fadeIn().focus();
 
-  if (role !== 'Customized') {
 
-  }
+  // TODO: update <select /> vals based on role
+  // (or fuck off if changed to custom)
+  // if (role !== 'Customized') {
+
+  // }
+
+
+  setTimeout(function () {
+    $('#loading').fadeOut();
+    activeCache.focus();
+  }, 1800)
 }
