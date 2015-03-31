@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Live Region Playground</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Live Region Playground</h1>
+    <div id="loading" role="alert" tabindex="-1" style="display: none;">Please wait while options are configured...</div>
+    <fieldset>
+      <legend>Configure live region</legend>
+      <div class="form">
+        <label for="role">role:</label>
+        <select id="role">
+          <option selected="selected">Customized</option>
+          <option>Status</option>
+          <option>Alert</option>
+          <option>Log</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="aria-live">aria-live value:</label>
+        <select id="aria-live">
+          <option selected="selected">polite</option>
+          <option>assertive</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="aria-atomic">aria-atomic value:</label>
+        <select id="aria-atomic">
+          <option selected="selected">true</option>
+          <option>false</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="aria-relevant">aria-relevant value:</label>
+        <select id="aria-relevant">
+          <option selected="selected">additions text</option>
+          <option>additions</option>
+          <option>removals</option>
+          <option>text</option>
+          <option>all</option>
+        </select>
+      </div>
+      <div class="field">
+        <div id="trigger">Trigger content change:</div>
+        <ul role="radiogroup" aria-labelledby="trigger">
+          <li>
+            <label for="once">Once</label>
+            <input type="radio" name="trigger-type" id="once" value="once" checked="checked">
+          </li>
+          <li>
+            <label for="five">Every 5 seconds</label>
+            <input type="radio" name="trigger-type" id="five" value="five">
+          </li>
+          <li>
+            <label for="ten">Every 10 seconds</label>
+            <input type="radio" name="trigger-type" id="ten" value="ten">
+          </li>
+        </ul>
+      </div>
+      <button type="button" id="submit">Submit</button>
+    </fieldset>
+    <h2>Configured DIV</h2>
+    <div id="fixture">
+      <div>I am static content.</div>
+      <div id="update"></div>
+    </div>
+    <button type="button" id="clear">Clear added content</button>
+
+    <script src="live-regions.js"></script>
+  </body>
+</html>

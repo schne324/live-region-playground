@@ -1,0 +1,32 @@
+:focus {
+  outline: 2px solid;
+}
+
+body { color: #000; }
+
+label, #trigger {
+  font-size: 20px;
+}
+
+select {
+  background-color: #eee;
+  font-size: 18px;
+}
+
+#fixture {
+  width: 85%;
+  margin: 0 auto;
+  text-align: center;
+  border: 5px solid #000;
+  height: 300px;
+}
+
+#loading {
+  position: absolute;
+  width: 500px;
+  padding: 25px;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+  border: 10px double #fff;
+}
