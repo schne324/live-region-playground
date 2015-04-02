@@ -1,7 +1,10 @@
 'use strict';
 
 var i = 1;
+var interval;
 var $role = $('#role');
+var $stop = $('#stop');
+var $mean = $('#mean');
 var $update = $('#update');
 var $fixture = $('#fixture');
 var $ariaLive = $('#aria-live');
@@ -10,25 +13,57 @@ var $ariaRelevant = $('#aria-relevant');
 
 configureRegion();
 
+// apply attrs based on fields
 $('#submit').on('click', configureRegion);
+
+// clear the live region div (except for the "static content")
 $('#clear').on('click', function () {
   $update.empty();
+  i = 1;
 });
 
+$('input[name="cus-def"]').on('change', function () {
+  if ($('#default').is(':checked')) {
+    $ariaLive.attr('disabled', 'disabled');
+    $ariaAtomic.attr('disabled', 'disabled');
+    $ariaRelevant.attr('disabled', 'disabled');
+  } else {
+    $ariaLive.removeAttr('disabled');
+    $ariaAtomic.removeAttr('disabled');
+    $ariaRelevant.removeAttr('disabled');
+  }
+})
+
+// stop adding content
+$stop.on('click', function () {
+  if (interval) {
+    clearInterval(interval);
+  }
+});
+
+// configure vals of others based on newly selected role
 $role.on('change', onroleChange);
 
+// mimic real label behavior
+$('#for-default')
+  .on('click', function () {
+    $('#default').click();
+  });
+
+$('#for-custom')
+  .on('click', function () {
+    $('#custom').click();
+  });
 
 function configureRegion(e) {
-  // configure attributes
-  var roleVal = $role.val()
-  var isCustom = roleVal === 'Customized';
-
-  if (!isCustom) {
-    $fixture.attr('role', roleVal);
+  if (interval) {
+    clearInterval(interval);
   }
 
+  // configure attributes
   $fixture
     .attr({
+      'role': $role.val(),
       'aria-live': $ariaLive.val(),
       'aria-atomic': $ariaAtomic.val(),
       'aria-relevant': $ariaRelevant.val()
@@ -40,16 +75,17 @@ function configureRegion(e) {
   }
 }
 
-
 function configureInsertion() {
   var freq = $('input[name="trigger-type"]:checked').val();
 
   // call `insertContent` based on frequency chosen
   if (freq === 'once') {
+    $stop.attr('disabled', 'disabled');
     insertContent()
   } else {
+    $stop.removeAttr('disabled');
     var freq = (freq === 'five') ? 5 : 10;
-    setInterval(insertContent, freq * 1000)
+    interval = setInterval(insertContent, freq * 1000);
   }
 }
 
@@ -59,21 +95,27 @@ function insertContent() {
 }
 
 function onroleChange() {
+  if ($('#custom').is(':checked')) {
+    return;
+  }
+
   var activeCache = document.activeElement;
   var role = $role.val();
-  console.log('role: ', role);
-  $('#loading').fadeIn().focus();
 
+  // update <select /> vals based on role
+  if (role == 'alert') {
+    $ariaLive.val('polite');
+    $ariaAtomic.val('true');
+    $ariaRelevant.val('text');
+  } else if (role == 'log') {
+    $ariaLive.val('polite');
+    $ariaAtomic.val('false');
+    $ariaRelevant.val('text');
+  } else if (role == 'status') {
+    $ariaLive.val('polite');
+    $ariaAtomic.val('true');
+    $ariaRelevant.val('text');
+  }
 
-  // TODO: update <select /> vals based on role
-  // (or fuck off if changed to custom)
-  // if (role !== 'Customized') {
-
-  // }
-
-
-  setTimeout(function () {
-    $('#loading').fadeOut();
-    activeCache.focus();
-  }, 1800)
 }
+

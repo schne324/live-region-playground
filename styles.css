@@ -3,8 +3,10 @@
 }
 
 body { color: #000; }
-
-label, #trigger {
+legend {
+  font-size: 25px;
+}
+label, #trigger, #custom-default {
   font-size: 20px;
 }
 
@@ -29,4 +31,13 @@ select {
   background-color: #000;
   color: #fff;
   border: 10px double #fff;
+}
+
+#mean {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
 }

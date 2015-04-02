@@ -7,16 +7,22 @@
   </head>
   <body>
     <h1>Live Region Playground</h1>
-    <div id="loading" role="alert" tabindex="-1" style="display: none;">Please wait while options are configured...</div>
-    <fieldset>
+    <div id="loading" tabindex="-1" style="display: none;">Please wait while options are configured...</div>
+    <fieldset id="live-config">
       <legend>Configure live region</legend>
+      <div class="form">
+        <div id="custom-default">Use default values based on role?</div>
+        <label id="for-default">Yes</label>
+        <input aria-labelledby="custom-default for-default" type="radio" id="default" value="default" name="cus-def">
+        <label id="for-custom">No</label>
+        <input aria-labelledby="custom-default for-custom" type="radio" id="custom" value="custom" name="cus-def" checked="checked">
+      </div>
       <div class="form">
         <label for="role">role:</label>
         <select id="role">
-          <option selected="selected">Customized</option>
-          <option>Status</option>
-          <option>Alert</option>
-          <option>Log</option>
+          <option selected="selected">status</option>
+          <option>alert</option>
+          <option>log</option>
         </select>
       </div>
       <div class="field">
@@ -36,10 +42,9 @@
       <div class="field">
         <label for="aria-relevant">aria-relevant value:</label>
         <select id="aria-relevant">
-          <option selected="selected">additions text</option>
+          <option selected="selected">text</option>
           <option>additions</option>
           <option>removals</option>
-          <option>text</option>
           <option>all</option>
         </select>
       </div>
@@ -61,14 +66,14 @@
         </ul>
       </div>
       <button type="button" id="submit">Submit</button>
+      <button type="button" id="clear">Clear added content</button>
+      <button type="button" disabled="disabled" id="stop">Stop adding content</button>
     </fieldset>
     <h2>Configured DIV</h2>
     <div id="fixture">
       <div>I am static content.</div>
       <div id="update"></div>
     </div>
-    <button type="button" id="clear">Clear added content</button>
-
     <script src="live-regions.js"></script>
   </body>
 </html>
