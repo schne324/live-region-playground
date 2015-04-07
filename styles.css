@@ -39,6 +39,7 @@ li {
   border: 5px solid #000;
   height: 300px;
   overflow: scroll;
+  padding: 11px;
 }
 
 #loading {
