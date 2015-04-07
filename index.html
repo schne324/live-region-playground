@@ -13,12 +13,12 @@
       <div class="form">
         <div>
           <input type="radio" id="default" value="default" name="cus-def" aria-describedby="role-help">
-          <label id="for-default">Use role defaults</label>
+          <label for="default">Use role defaults</label>
           <span id="role-help" class="helper">(values for aria-live, aria-atomic and aria-relevant will be auto-populated)</span>
         </div>
         <div>
           <input type="radio" id="custom" value="custom" name="cus-def" checked="checked">
-          <label id="for-custom">Create custom live region</label>
+          <label for="custom">Create custom live region</label>
         </div>
       </div>
       <div class="form">
@@ -56,7 +56,7 @@
       </div>
       <div class="field">
         <div id="trigger">Trigger content change:</div>
-        <ul role="radiogroup" aria-labelledby="trigger">
+        <ul role="group" aria-labelledby="trigger">
           <li>
             <input type="radio" name="trigger-type" aria-describedby="content-change-help" id="once" value="once" checked="checked">
             <label for="once">Once</label>

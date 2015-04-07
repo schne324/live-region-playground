@@ -35,9 +35,9 @@ $('input[name="cus-def"]').on('change', function () {
     $ariaAtomic.attr('disabled', 'disabled').attr('aria-disabled', 'true');
     $ariaRelevant.attr('disabled', 'disabled').attr('aria-disabled', 'true');
   } else {
-    $ariaLive.removeAttr('disabled').attr('aria-disabled', 'true');
-    $ariaAtomic.removeAttr('disabled').attr('aria-disabled', 'true');
-    $ariaRelevant.removeAttr('disabled').attr('aria-disabled', 'true');
+    $ariaLive.removeAttr('disabled').removeAttr('aria-disabled', 'true');
+    $ariaAtomic.removeAttr('disabled').removeAttr('aria-disabled', 'true');
+    $ariaRelevant.removeAttr('disabled').removeAttr('aria-disabled', 'true');
   }
 })
 
