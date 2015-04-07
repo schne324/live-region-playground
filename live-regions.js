@@ -51,17 +51,6 @@ $stop.on('click', function () {
 // configure vals of others based on newly selected role
 $role.on('change', onroleChange);
 
-// mimic real label behavior
-$('#for-default')
-  .on('click', function () {
-    $('#default').click();
-  });
-
-$('#for-custom')
-  .on('click', function () {
-    $('#custom').click();
-  });
-
 function configureRegion(e) {
   if (interval) {
     clearInterval(interval);
