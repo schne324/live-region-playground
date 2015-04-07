@@ -10,9 +10,26 @@ label, #trigger, #custom-default {
   font-size: 20px;
 }
 
+.helper {
+  font-style: italic;
+}
+
 select {
   background-color: #eee;
   font-size: 18px;
+}
+
+ul {
+  margin: 2px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.inner-field {
+  font-size: 16px;
+  margin-left: 20px;
 }
 
 #fixture {
@@ -21,6 +38,7 @@ select {
   text-align: center;
   border: 5px solid #000;
   height: 300px;
+  overflow: scroll;
 }
 
 #loading {

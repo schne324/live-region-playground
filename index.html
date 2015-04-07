@@ -9,13 +9,17 @@
     <h1>Live Region Playground</h1>
     <div id="loading" tabindex="-1" style="display: none;">Please wait while options are configured...</div>
     <fieldset id="live-config">
-      <legend>Configure live region</legend>
+      <legend>How do you want to configure your live region?</legend>
       <div class="form">
-        <div id="custom-default">Use default values based on role?</div>
-        <label id="for-default">Yes</label>
-        <input aria-labelledby="custom-default for-default" type="radio" id="default" value="default" name="cus-def">
-        <label id="for-custom">No</label>
-        <input aria-labelledby="custom-default for-custom" type="radio" id="custom" value="custom" name="cus-def" checked="checked">
+        <div>
+          <input type="radio" id="default" value="default" name="cus-def" aria-describedby="role-help">
+          <label id="for-default">Use role defaults</label>
+          <span id="role-help" class="helper">(values for aria-live, aria-atomic and aria-relevant will be auto-populated)</span>
+        </div>
+        <div>
+          <input type="radio" id="custom" value="custom" name="cus-def" checked="checked">
+          <label id="for-custom">Create custom live region</label>
+        </div>
       </div>
       <div class="form">
         <label for="role">role:</label>
@@ -23,6 +27,7 @@
           <option selected="selected">status</option>
           <option>alert</option>
           <option>log</option>
+          <option>marquee</option>
         </select>
       </div>
       <div class="field">
@@ -30,6 +35,7 @@
         <select id="aria-live">
           <option selected="selected">polite</option>
           <option>assertive</option>
+          <option>off</option>
         </select>
       </div>
       <div class="field">
@@ -52,26 +58,34 @@
         <div id="trigger">Trigger content change:</div>
         <ul role="radiogroup" aria-labelledby="trigger">
           <li>
+            <input type="radio" name="trigger-type" aria-describedby="content-change-help" id="once" value="once" checked="checked">
             <label for="once">Once</label>
-            <input type="radio" name="trigger-type" id="once" value="once" checked="checked">
           </li>
           <li>
+            <input type="radio" name="trigger-type" aria-describedby="content-change-help" id="five" value="five">
             <label for="five">Every 5 seconds</label>
-            <input type="radio" name="trigger-type" id="five" value="five">
           </li>
           <li>
+            <input type="radio" name="trigger-type" aria-describedby="content-change-help" id="ten" value="ten">
             <label for="ten">Every 10 seconds</label>
-            <input type="radio" name="trigger-type" id="ten" value="ten">
           </li>
         </ul>
+        <div id="content-change-help" class="helper">
+          Content change will alternate between additions and modifications with the exception of content removal every 10th iteration.
+        </div>
       </div>
       <button type="button" id="submit">Submit</button>
       <button type="button" id="clear">Clear added content</button>
       <button type="button" disabled="disabled" id="stop">Stop adding content</button>
     </fieldset>
-    <h2>Configured DIV</h2>
+    <h2>Live Region</h2>
     <div id="fixture">
-      <div>I am static content.</div>
+      <div>
+        <div id="static">
+          <h3>Static Content</h3>
+          <div>I am static content.  The changing content will take place below.</div>
+        </div>
+      </div>
       <div id="update"></div>
     </div>
     <script src="live-regions.js"></script>

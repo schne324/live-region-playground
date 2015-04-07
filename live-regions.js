@@ -1,6 +1,12 @@
-'use strict';
+/**
+ * Live region playground
+ *
+ * @author Harris Schneiderman
+ */
+
 
 var i = 1;
+var contentChanges = 1;
 var interval;
 var $role = $('#role');
 var $stop = $('#stop');
@@ -20,17 +26,18 @@ $('#submit').on('click', configureRegion);
 $('#clear').on('click', function () {
   $update.empty();
   i = 1;
+  contentChanges = 1;
 });
 
 $('input[name="cus-def"]').on('change', function () {
   if ($('#default').is(':checked')) {
-    $ariaLive.attr('disabled', 'disabled');
-    $ariaAtomic.attr('disabled', 'disabled');
-    $ariaRelevant.attr('disabled', 'disabled');
+    $ariaLive.attr('disabled', 'disabled').attr('aria-disabled', 'true');
+    $ariaAtomic.attr('disabled', 'disabled').attr('aria-disabled', 'true');
+    $ariaRelevant.attr('disabled', 'disabled').attr('aria-disabled', 'true');
   } else {
-    $ariaLive.removeAttr('disabled');
-    $ariaAtomic.removeAttr('disabled');
-    $ariaRelevant.removeAttr('disabled');
+    $ariaLive.removeAttr('disabled').attr('aria-disabled', 'true');
+    $ariaAtomic.removeAttr('disabled').attr('aria-disabled', 'true');
+    $ariaRelevant.removeAttr('disabled').attr('aria-disabled', 'true');
   }
 })
 
@@ -90,8 +97,21 @@ function configureInsertion() {
 }
 
 function insertContent() {
-  $update.append('<div>Updated Content #' + i + '</div>');
-  i++;
+  if (contentChanges < 10) {
+    if (isOdd(contentChanges)) {
+      $update.append('<div><span class="added">Added Content</span> #' + i + '</div>');
+      if (contentChanges === 9) {
+        $update.append('<div>Also, more <span class="added">added content</span>! Unfortunately, I will be removed next...</div>')
+      }
+      i++;
+    } else {
+      $update.find('.added').last().html('Modified Content');
+    }
+  } else {
+    $update.children().last().remove();
+    contentChanges = 1; // reset it.
+  }
+  contentChanges++;
 }
 
 function onroleChange() {
@@ -115,7 +135,13 @@ function onroleChange() {
     $ariaLive.val('polite');
     $ariaAtomic.val('true');
     $ariaRelevant.val('text');
+  } else if (role == 'marquee') {
+    $ariaLive.val('off');
+    $ariaAtomic.val('false');
+    $ariaRelevant.val('text');
   }
-
 }
 
+function isOdd(n) {
+  return Math.abs(n) % 2 == 1;
+}
