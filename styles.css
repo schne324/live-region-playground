@@ -6,6 +6,11 @@ body { color: #000; }
 legend {
   font-size: 25px;
 }
+
+fieldset {
+  border: none;
+}
+
 label, #trigger, #custom-default {
   font-size: 20px;
 }
