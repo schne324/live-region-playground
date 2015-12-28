@@ -1,0 +1,67 @@
+:focus {
+  outline: 2px solid;
+}
+
+body { color: #000; }
+legend {
+  font-size: 25px;
+}
+
+fieldset {
+  border: none;
+}
+
+label, #trigger, #custom-default {
+  font-size: 20px;
+}
+
+.helper {
+  font-style: italic;
+}
+
+select {
+  background-color: #eee;
+  font-size: 18px;
+}
+
+ul {
+  margin: 2px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.inner-field {
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+#fixture {
+  width: 85%;
+  margin: 0 auto;
+  text-align: center;
+  border: 5px solid #000;
+  height: 300px;
+  overflow: scroll;
+  padding: 11px;
+}
+
+#loading {
+  position: absolute;
+  width: 500px;
+  padding: 25px;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+  border: 10px double #fff;
+}
+
+#mean {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+}
