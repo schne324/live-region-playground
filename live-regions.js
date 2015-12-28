@@ -1,16 +1,17 @@
+'use strict';
+
 /**
  * Live region playground
  *
  * @author Harris Schneiderman
  */
 
-
+/* global $*/
 var i = 1;
 var contentChanges = 1;
 var interval;
 var $role = $('#role');
 var $stop = $('#stop');
-var $mean = $('#mean');
 var $update = $('#update');
 var $fixture = $('#fixture');
 var $ariaLive = $('#aria-live');
@@ -39,7 +40,7 @@ $('input[name="cus-def"]').on('change', function () {
     $ariaAtomic.removeAttr('disabled').removeAttr('aria-disabled', 'true');
     $ariaRelevant.removeAttr('disabled').removeAttr('aria-disabled', 'true');
   }
-})
+});
 
 // stop adding content
 $stop.on('click', function () {
@@ -77,10 +78,10 @@ function configureInsertion() {
   // call `insertContent` based on frequency chosen
   if (freq === 'once') {
     $stop.attr('disabled', 'disabled');
-    insertContent()
+    insertContent();
   } else {
     $stop.removeAttr('disabled');
-    var freq = (freq === 'five') ? 5 : 10;
+    freq = (freq === 'five') ? 5 : 10;
     interval = setInterval(insertContent, freq * 1000);
   }
 }
@@ -90,7 +91,7 @@ function insertContent() {
     if (isOdd(contentChanges)) {
       $update.append('<div><span class="added">Added Content</span> #' + i + '</div>');
       if (contentChanges === 9) {
-        $update.append('<div>Also, more <span class="added">added content</span>! Unfortunately, I will be removed next...</div>')
+        $update.append('<div>Also, more <span class="added">added content</span>! Unfortunately, I will be removed next...</div>');
       }
       i++;
     } else {
@@ -108,12 +109,11 @@ function onroleChange() {
     return;
   }
 
-  var activeCache = document.activeElement;
   var role = $role.val();
 
   // update <select /> vals based on role
   if (role == 'alert') {
-    $ariaLive.val('polite');
+    $ariaLive.val('assertive');
     $ariaAtomic.val('true');
     $ariaRelevant.val('text');
   } else if (role == 'log') {
@@ -129,6 +129,9 @@ function onroleChange() {
     $ariaAtomic.val('false');
     $ariaRelevant.val('text');
   }
+
+  // update the attributes right away
+  configureRegion();
 }
 
 function isOdd(n) {
